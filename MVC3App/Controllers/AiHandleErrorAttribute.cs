@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Microsoft.ApplicationInsights;
 
 namespace MVC3App.Controllers
@@ -14,7 +10,7 @@ namespace MVC3App.Controllers
             if (filterContext != null && filterContext.HttpContext != null && filterContext.Exception != null)
             {
                 //If customError is Off, then AI HTTPModule will report the exception
-                if (true/*filterContext.HttpContext.IsCustomErrorEnabled*/)
+                if (filterContext.HttpContext.IsCustomErrorEnabled)
                 {
                     var ai = new TelemetryClient();
                     ai.TrackException(filterContext.Exception);
@@ -22,6 +18,5 @@ namespace MVC3App.Controllers
             }
             base.OnException(filterContext);
         }
-
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Web;
 using System.Web.Mvc;
+using MVC3App.Models;
 
 namespace MVC3App.Controllers
 {
@@ -12,12 +9,17 @@ namespace MVC3App.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
-            throw new AccessViolationException();
             return View();
         }
 
         public ActionResult About()
         {
+            var r = new Random();
+            if (r.Next() % 3 == 0)
+            {
+                var c = new AboutModel();
+                c.saySomething();
+            }
             return View();
         }
     }
